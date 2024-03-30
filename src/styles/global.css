@@ -27,6 +27,7 @@ tbody {
 
 thead {
     font-family: Comfortaa, ui-rounded;
+    font-size: larger;
     font-weight: bold;
 }
 
@@ -46,4 +47,5 @@ th, td {
 
 th {
     background-color: #313244;
+
 }
