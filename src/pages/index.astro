@@ -3,7 +3,6 @@ import {turso} from "../turso";
 import {Image} from 'astro:assets'
 import "../styles/global.css"
 const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes ORDER BY total desc')
-const {imgDimension} = "48"
 ---
 
 <html lang="en">
@@ -31,7 +30,7 @@ const {imgDimension} = "48"
         <tbody>
         {rows.map((character) => (
                 <tr>
-                    <td><Image class="avatar" src={character.playerAvatar} width="48px" height="48px" alt="Headshot of a player character from Final Fantasy 14"/> </td>
+                    <td><Image class="avatar" src={character.playerAvatar} width="48" height="48" alt="Headshot of a player character from Final Fantasy 14"/> </td>
                     <td>{character.playerName}</td>
                     <td>{character.playerWorld}</td>
                     <td>{character.dotes}</td>
