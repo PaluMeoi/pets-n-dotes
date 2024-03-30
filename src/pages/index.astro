@@ -30,7 +30,11 @@ const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar
         <tbody>
         {rows.map((character) => (
                 <tr>
-                    <td><Image class="avatar" src={character.playerAvatar} width="48" height="48" alt="Headshot of a player character from Final Fantasy 14"/> </td>
+
+                    <td>
+                        {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
+                        <Image class="avatar" src={character.playerAvatar} width="48" height="48" alt="Headshot of a player character from Final Fantasy 14"/>
+                        ) :  "😺" } </td>
                     <td>{character.playerName}</td>
                     <td>{character.playerWorld}</td>
                     <td>{character.dotes}</td>
