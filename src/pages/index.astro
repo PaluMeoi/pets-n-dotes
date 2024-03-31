@@ -2,7 +2,7 @@
 import {turso} from "../turso";
 import {Image} from 'astro:assets'
 import "../styles/global.css"
-const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
+const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
 ---
 
 <html lang="en">
@@ -11,14 +11,14 @@ const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <meta name="viewport" content="width=device-width"/>
   <meta name="generator" content={Astro.generator}/>
-  <title>💞 Palurien's Dotes 💞</title>
+  <title>💞 <span class="heading-text">Palurien's Dotes</span> 💞</title>
   <style>
       @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
   </style>
 </head>
 <body>
 <div class="content">
-  <h1>💞 Dotes 'n Pets 💞</h1>
+  <h1>💞 <span>Dotes 'n Pets</span> 💞</h1>
   <table>
     <thead>
     <tr>
@@ -33,14 +33,15 @@ const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar
     <tbody>
     {rows.map((character) => (
       <tr>
-        <td>
-            <div class="avatar-cell">
-              {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
-                  <Image class="avatar" src={character.playerAvatar} loading="eager" width="48"
-                         height="48"
-                         alt="Headshot of a player character from Final Fantasy 14"/>) : "😺"} <span class="character-name">{character.playerName}
-              @{character.playerWorld}</span>
-            </div></td>
+        <td><a href=`https://na.finalfantasyxiv.com/lodestone/character/${character.playerId}/`>
+          <div class="avatar-cell">
+            {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
+                <Image class="avatar" src={character.playerAvatar} loading="eager" width="48"
+                       height="48"
+                       alt="Headshot of a player character from Final Fantasy 14"/>) : "😺"} <span
+              class="character-name">{character.playerName}</span>
+          </div>
+        </a></td>
         <!--<td>{character.playerName} @{character.playerWorld}</td>-->
         <!--<td>{character.playerWorld}</td>-->
         <td>{character.dotes}</td>

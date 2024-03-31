@@ -10,16 +10,23 @@
 
 }
 
+h1 {
+    font-family: Comfortaa, ui-rounded;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+h1 span {
+    /*background: radial-gradient(circle, rgba(245,194,231,1) 0%, rgba(243,139,168,1) 100%);*/
+    background: linear-gradient(45deg, rgba(243, 139, 168, 1) 0%, rgba(245, 194, 231, 1) 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 body {
     color: #cdd6f4;
     background-color: #1e1e2e;
-}
-
-h1 {
-    font-family: Comfortaa, ui-rounded;
-    /*font-size: 40px;*/
-    font-weight: bolder;
-    font-size: xx-large;
 }
 
 tbody {
@@ -31,6 +38,8 @@ thead {
     font-family: Comfortaa, ui-rounded;
     font-size: larger;
     font-weight: bold;
+    background: #313244;
+
 }
 
 table {
@@ -49,7 +58,10 @@ th, td {
 }
 
 th {
-    background-color: #313244;
+    /*background: linear-gradient(45deg, rgba(243,139,168,1) 0%, rgba(245,194,231,1) 100%);*/
+    /*color: transparent;*/
+    /*-webkit-background-clip: text;*/
+    /*-webkit-text-fill-color: transparent;*/
 }
 
 .avatar-cell {
@@ -59,6 +71,16 @@ th {
 
 .avatar-cell img {
     margin-right: 8px;
+}
+
+a {
+    color: #cdd6f4;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: #74c7ec;
+    }
 }
 
 .avatar-cell .character-name {
