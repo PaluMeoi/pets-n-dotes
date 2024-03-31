@@ -14,6 +14,7 @@ h1 {
     font-family: Comfortaa, ui-rounded;
     font-weight: bolder;
     font-size: xx-large;
+    text-shadow: 0 0 0.25em #f38ba8;
 }
 
 h1 span {
@@ -22,6 +23,7 @@ h1 span {
     color: transparent;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: none;
 }
 
 body {
@@ -44,7 +46,8 @@ thead {
 
 table {
     flex: auto;
-    width: 35%;
+    min-width: 25%;
+    max-width: 50%;
     border-collapse: collapse;
 }
 
@@ -69,13 +72,11 @@ th {
     align-items: center;
 }
 
-.avatar-cell img {
-    margin-right: 8px;
-}
 
 a {
     color: #cdd6f4;
     text-decoration: none;
+
 
     &:hover,
     &:focus {
