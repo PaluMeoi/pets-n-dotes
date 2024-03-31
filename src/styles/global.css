@@ -45,21 +45,22 @@ th, td {
     padding: 8px;
     display: table-cell;
     align-content: center;
+    flex-grow: 1;
 }
 
 th {
     background-color: #313244;
 }
 
-table .avatar-cell {
+.avatar-cell {
     display: flex;
     align-items: center;
 }
 
-table .avatar-cell img {
+.avatar-cell img {
     margin-right: 8px;
 }
 
-table .avatar-cell .character-name {
+.avatar-cell .character-name {
     flex-grow: 1;
 }
