@@ -11,7 +11,7 @@ const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
     <meta name="viewport" content="width=device-width"/>
     <meta name="generator" content={Astro.generator}/>
-    <title>Astro</title>
+    <title>💞 Palurien's Dotes 💞</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
     </style>
@@ -36,15 +36,14 @@ const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar
 
                     <td>
                         {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
-                        <Image class="avatar" src={character.playerAvatar} width="48" height="48" alt="Headshot of a player character from Final Fantasy 14"/>
-                        ) :  "😺" } </td>
+                                <Image class="avatar" src={character.playerAvatar} loading="eager" width="48" height="48"
+                                       alt="Headshot of a player character from Final Fantasy 14"/>) : "😺"} </td>
                     <td>{character.playerName}</td>
                     <td>{character.playerWorld}</td>
                     <td>{character.dotes}</td>
                     <td>{character.pets}</td>
                     <td>{character.total}</td>
-                </tr>
-        ))}
+                </tr>))}
         </tbody>
     </table>
 </div>
