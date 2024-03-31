@@ -39,7 +39,7 @@ const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, e
             {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
                 <Image class="avatar" src={character.playerAvatar} loading="eager" width="48"
                        height="48"
-                       alt="Headshot of a player character from Final Fantasy 14"/>) : <Icon name="ic:twotone-tag-faces" size="48px"/>} <span
+                       alt="Headshot of a player character from Final Fantasy 14"/>) : <Icon name="ic:twotone-tag-faces" size="48"/>} <span
               class="character-name">{character.playerName}</span>
           </div>
         </a></td>
