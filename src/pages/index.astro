@@ -4,7 +4,7 @@ import {Image} from 'astro:assets';
 import {Icon} from 'astro-icon/components';
 import "../styles/global.css"
 const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
-const {themeColor} = "#181825"
+const themeColor = "#181825"
 ---
 
 <html lang="en">
