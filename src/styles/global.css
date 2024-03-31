@@ -87,3 +87,8 @@ a {
 .avatar-cell .character-name {
     flex-grow: 1;
 }
+
+[data-icon] {
+    width: 48px;
+    height: 48px;
+}
