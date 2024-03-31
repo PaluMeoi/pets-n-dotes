@@ -2,50 +2,51 @@
 import {turso} from "../turso";
 import {Image} from 'astro:assets'
 import "../styles/global.css"
-const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes ORDER BY total desc')
+const {rows} = await turso.execute('SELECT playerName, playerWorld, playerAvatar, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
 ---
 
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-    <meta name="viewport" content="width=device-width"/>
-    <meta name="generator" content={Astro.generator}/>
-    <title>💞 Palurien's Dotes 💞</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
-    </style>
+  <meta charset="utf-8"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <meta name="viewport" content="width=device-width"/>
+  <meta name="generator" content={Astro.generator}/>
+  <title>💞 Palurien's Dotes 💞</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+  </style>
 </head>
 <body>
 <div class="content">
-    <h1>💞 Dotes 'n Pets 💞</h1>
-    <table>
-        <thead>
-        <tr>
-            <th/>
-            <th>Name</th>
-            <th>World</th>
-            <th>Dotes</th>
-            <th>Pets</th>
-            <th>All Emotes</th>
-        </tr>
-        </thead>
-        <tbody>
-        {rows.map((character) => (
-                <tr>
-
-                    <td>
-                        {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
-                                <Image class="avatar" src={character.playerAvatar} loading="eager" width="48" height="48"
-                                       alt="Headshot of a player character from Final Fantasy 14"/>) : "😺"} </td>
-                    <td>{character.playerName}</td>
-                    <td>{character.playerWorld}</td>
-                    <td>{character.dotes}</td>
-                    <td>{character.pets}</td>
-                    <td>{character.total}</td>
-                </tr>))}
-        </tbody>
-    </table>
+  <h1>💞 Dotes 'n Pets 💞</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Character</th>
+      <!--<th></th>-->
+      <!--<th>World</th>-->
+      <th>Dotes</th>
+      <th>Pets</th>
+      <th>All Emotes</th>
+    </tr>
+    </thead>
+    <tbody>
+    {rows.map((character) => (
+      <tr>
+        <td class="avatar-cell">
+            {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
+              <Image class="avatar" src={character.playerAvatar} loading="eager" width="48"
+                     height="48"
+                     alt="Headshot of a player character from Final Fantasy 14"/>) : "😺"} <span class="character-name">{character.playerName}
+          @{character.playerWorld}</span></td>
+        <!--<td>{character.playerName} @{character.playerWorld}</td>-->
+        <!--<td>{character.playerWorld}</td>-->
+        <td>{character.dotes}</td>
+        <td>{character.pets}</td>
+        <td>{character.total}</td>
+      </tr>))}
+    </tbody>
+  </table>
 </div>
 </body>
 </html>
