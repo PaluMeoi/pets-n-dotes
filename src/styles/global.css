@@ -35,8 +35,8 @@ thead {
 
 table {
     flex: auto;
-    border-collapse: collapse;
     width: 35%;
+    border-collapse: collapse;
 }
 
 th, td {
@@ -51,18 +51,15 @@ th {
     background-color: #313244;
 }
 
-th, td .avatar-cell {
-}
-
-.avatar-cell {
+table .avatar-cell {
     display: flex;
     align-items: center;
 }
 
-.avatar-cell img {
+table .avatar-cell img {
     margin-right: 8px;
 }
 
-.avatar-cell .character-name {
+table .avatar-cell .character-name {
     flex-grow: 1;
 }
