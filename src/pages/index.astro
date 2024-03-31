@@ -4,6 +4,7 @@ import {Image} from 'astro:assets';
 import {Icon} from 'astro-icon/components';
 import "../styles/global.css"
 const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
+const {themeColor} = "#181825"
 ---
 
 <html lang="en">
@@ -12,6 +13,9 @@ const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, e
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <meta name="viewport" content="width=device-width"/>
   <meta name="generator" content={Astro.generator}/>
+  <meta name="theme-color" content={themeColor} />
+  <meta name="apple-mobile-web-app-status-bar-style" content={themeColor} />
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>💞 Palurien's Dotes< 💞</title>
   <style>
       @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
