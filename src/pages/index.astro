@@ -1,6 +1,7 @@
 ---
 import {turso} from "../turso";
-import {Image} from 'astro:assets'
+import {Image} from 'astro:assets';
+import {Icon} from 'astro-icon/components';
 import "../styles/global.css"
 const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
 ---
@@ -38,7 +39,7 @@ const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, e
             {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
                 <Image class="avatar" src={character.playerAvatar} loading="eager" width="48"
                        height="48"
-                       alt="Headshot of a player character from Final Fantasy 14"/>) : "😺"} <span
+                       alt="Headshot of a player character from Final Fantasy 14"/>) : <Icon name="ic:twotone-tag-faces" size="48px"/>} <span
               class="character-name">{character.playerName}</span>
           </div>
         </a></td>
