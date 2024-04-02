@@ -1,5 +1,6 @@
 ---
 import {turso} from "../turso";
+import  SpeedInsights  from "@vercel/speed-insights/astro"
 import {Image} from 'astro:assets';
 import {Icon} from 'astro-icon/components';
 import {AvatarComponent} from "../components/AvatarComponent";
@@ -67,7 +68,6 @@ function makeInitial(name: string) {
 <body class="ctp-frappe" style={{fontFamily: "Comfortaa"}}>
 <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "1em", marginRight: "1em"}}>
   <h1 style={{fontWeight: "bold", fontSize: "xx-large", marginTop: "0.5em"}}>💞 <span>Dotes 'n Pets</span> 💞</h1>
-  <!--<SelectComponent client:load placeholder="FUCK" items={pcSelectItems} />-->
 
   <Card style={{display: "flex", margin: "1em"}}>
     <CardContent>
