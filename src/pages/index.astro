@@ -2,16 +2,59 @@
 import {turso} from "../turso";
 import {Image} from 'astro:assets';
 import {Icon} from 'astro-icon/components';
+import {AvatarComponent} from "../components/AvatarComponent";
+import {SelectComponent} from "../components/SelectComponent";
 import "../styles/global.css"
-const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
+const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, playerWorld, pcName, pcAvatar, pcId, pcWorld, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
 const themeColor = "#181825"
+
+//  Handles building a selection component
+// let pcCharactersId  = [];
+// let pcCharacters = Object();
+// let pcSelectItems = [];
+// for (const char of rows) {
+//   if (!pcCharactersId.includes(char.pcId)) {
+//     pcCharactersId.push(char.pcId)
+//     pcCharacters[char.pcId] = {
+//       name: char.pcName,
+//       avatar: char.pcAvatar,
+//       id: char.pcId,
+//       world: char.pcWorld
+//     }
+//     pcSelectItems.push({selectLabel: char.pcName, selectValue:char.pcId, avatar:char.pcAvatar})
+//   }
+// }
+
+
+import {
+  Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow,
+} from "@/components/ui/table"
+
+import {
+  Avatar, AvatarFallback, AvatarImage,
+} from "@/components/ui/avatar"
+
+import {
+  Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
+} from "@/components/ui/card"
+
+import {Badge} from "@/components/ui/badge"
+import {cn} from "../lib/utils";
+
+
+
+
+function makeInitial(name: string) {
+  const firstLast = name.split(" ");
+  return `${firstLast[0].split('')[0]}${firstLast[1].split('')[0]}`
+}
 ---
 
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-  <meta name="viewport" content="width=device-width"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="generator" content={Astro.generator}/>
   <meta name="theme-color" content={themeColor} />
   <meta name="apple-mobile-web-app-status-bar-style" content={themeColor} />
@@ -21,40 +64,41 @@ const themeColor = "#181825"
       @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
   </style>
 </head>
-<body>
-<div class="content">
-  <h1>💞 <span>Dotes 'n Pets</span> 💞</h1>
-  <table>
-    <thead>
-    <tr>
-      <th>Character</th>
-      <!--<th></th>-->
-      <!--<th>World</th>-->
-      <th>Dotes</th>
-      <th>Pets</th>
-      <th>All Emotes</th>
-    </tr>
-    </thead>
-    <tbody>
-    {rows.map((character) => (
-      <tr>
-        <td><a href=`https://na.finalfantasyxiv.com/lodestone/character/${character.playerId}/`>
-          <div class="avatar-cell">
-            {character.playerAvatar !== null && typeof character.playerAvatar === 'string' ? (
-                <Image class="avatar" src={character.playerAvatar} loading="eager" width="48"
-                       height="48"
-                       alt="Headshot of a player character from Final Fantasy 14"/>) : <Icon name="ic:twotone-tag-faces" />} <span
-              class="character-name">{character.playerName}</span>
-          </div>
-        </a></td>
-        <!--<td>{character.playerName} @{character.playerWorld}</td>-->
-        <!--<td>{character.playerWorld}</td>-->
-        <td>{character.dotes}</td>
-        <td>{character.pets}</td>
-        <td>{character.total}</td>
-      </tr>))}
-    </tbody>
-  </table>
+<body class="ctp-frappe" style={{fontFamily: "Comfortaa"}}>
+<div style={{display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "1em", marginRight: "1em"}}>
+  <h1 style={{fontWeight: "bold", fontSize: "xx-large", marginTop: "0.5em"}}>💞 <span>Dotes 'n Pets</span> 💞</h1>
+  <!--<SelectComponent client:load placeholder="FUCK" items={pcSelectItems} />-->
+
+  <Card style={{display: "flex", margin: "1em"}}>
+    <CardContent>
+    <!--  <CardHeader>-->
+    <!--  <SelectComponent client:load placeholder="All Characters" items={pcSelectItems} />-->
+    <!--</CardHeader>-->
+      <Table style={{verticalAlign: "text-top"}}>
+        <TableHeader >
+          <TableHead>Character</TableHead>
+          <TableHead>Dotes</TableHead>
+          <TableHead>Pets</TableHead>
+          <TableHead>All Emotes</TableHead>
+        </TableHeader>
+        <TableBody >
+          {rows.map((character: any | {playerId: string | number , playerAvatar: string, playerName: string, playerWorld: string, total: string, dotes: string, pets: string}) => (
+              <TableRow key={character.playerId.toString()} >
+                <TableCell >
+                  <div class="character">
+                    <AvatarComponent client:load src={character.playerAvatar} alt={character.playerName}
+                                     fallbackText={makeInitial(character.playerName)} cName=""/>
+                    <div><span style={{marginLeft: "1em", display: "flex"}}>{character.playerName}</span><Badge style={{marginLeft: "1em", objectFit: "contain"}}>{character.playerWorld}</Badge></div>
+                  </div>
+                </TableCell>
+                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.dotes}</TableCell>
+                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.pets}</TableCell>
+                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.total}</TableCell>
+              </TableRow>))}
+        </TableBody>
+      </Table>
+    </CardContent>
+  </Card>
 </div>
 </body>
 </html>
