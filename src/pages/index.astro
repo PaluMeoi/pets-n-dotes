@@ -41,7 +41,11 @@ import {
 
 import {Badge} from "@/components/ui/badge"
 import {cn} from "../lib/utils";
+import {getColor} from "../scripts/getColor";
 
+const colors = [
+  "#cba6f7", '#f38ba8', "#eba0ac", "#74c7ec", "#fab387", "#a6e3a1", "#94e2d5", "#89dceb", "#89b4fa", "#b4befe"
+]
 
 
 
@@ -97,7 +101,11 @@ function makeInitial(name: string) {
                     <AvatarComponent client:load src={character.playerAvatar} alt={character.playerName}
                                      fallbackText={makeInitial(character.playerName)} cName=""/>
                     <div><span style={{marginLeft: "1em", display: "flex"}}>{character.playerName}</span>
-                      <Badge style={{marginLeft: "1em", objectFit: "contain"}}>{character.playerWorld}</Badge>
+                      <Badge style={{
+                        marginLeft: "1em",
+                        objectFit: "contain",
+                        background: getColor(character.playerWorld, colors)
+                      }}>{character.playerWorld}</Badge>
                     </div>
                   </div>
                 </TableCell>
