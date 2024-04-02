@@ -27,15 +27,15 @@ const themeColor = "#181825"
 
 
 import {
-  Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow,
+    Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table"
 
 import {
-  Avatar, AvatarFallback, AvatarImage,
+    Avatar, AvatarFallback, AvatarImage,
 } from "@/components/ui/avatar"
 
 import {
-  Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
+    Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
 } from "@/components/ui/card"
 
 import {Badge} from "@/components/ui/badge"
@@ -45,8 +45,8 @@ import {cn} from "../lib/utils";
 
 
 function makeInitial(name: string) {
-  const firstLast = name.split(" ");
-  return `${firstLast[0].split('')[0]}${firstLast[1].split('')[0]}`
+    const firstLast = name.split(" ");
+    return `${firstLast[0].split('')[0]}${firstLast[1].split('')[0]}`
 }
 ---
 
@@ -56,8 +56,8 @@ function makeInitial(name: string) {
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="generator" content={Astro.generator}/>
-  <meta name="theme-color" content={themeColor} />
-  <meta name="apple-mobile-web-app-status-bar-style" content={themeColor} />
+  <meta name="theme-color" content={themeColor}/>
+  <meta name="apple-mobile-web-app-status-bar-style" content={themeColor}/>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>💞 Palurien's Dotes 💞</title>
   <style>
@@ -71,24 +71,34 @@ function makeInitial(name: string) {
 
   <Card style={{display: "flex", margin: "1em"}}>
     <CardContent>
-    <!--  <CardHeader>-->
-    <!--  <SelectComponent client:load placeholder="All Characters" items={pcSelectItems} />-->
-    <!--</CardHeader>-->
+      <!--  <CardHeader>-->
+      <!--  <SelectComponent client:load placeholder="All Characters" items={pcSelectItems} />-->
+      <!--</CardHeader>-->
       <Table style={{verticalAlign: "text-top"}}>
-        <TableHeader >
+        <TableHeader>
           <TableHead>Character</TableHead>
           <TableHead>Dotes</TableHead>
           <TableHead>Pets</TableHead>
           <TableHead>All Emotes</TableHead>
         </TableHeader>
-        <TableBody >
-          {rows.map((character: any | {playerId: string | number , playerAvatar: string, playerName: string, playerWorld: string, total: string, dotes: string, pets: string}) => (
-              <TableRow key={character.playerId.toString()} >
-                <TableCell >
+        <TableBody>
+            {rows.map((character: any | {
+                playerId: string | number,
+                playerAvatar: string,
+                playerName: string,
+                playerWorld: string,
+                total: string,
+                dotes: string,
+                pets: string
+            }) => (
+              <TableRow key={character.playerId.toString()}>
+                <TableCell>
                   <div class="character">
                     <AvatarComponent client:load src={character.playerAvatar} alt={character.playerName}
                                      fallbackText={makeInitial(character.playerName)} cName=""/>
-                    <div><span style={{marginLeft: "1em", display: "flex"}}>{character.playerName}</span><Badge style={{marginLeft: "1em", objectFit: "contain"}}>{character.playerWorld}</Badge></div>
+                    <div><span style={{marginLeft: "1em", display: "flex"}}>{character.playerName}</span>
+                      <Badge style={{marginLeft: "1em", objectFit: "contain"}}>{character.playerWorld}</Badge>
+                    </div>
                   </div>
                 </TableCell>
                 <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.dotes}</TableCell>
