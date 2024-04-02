@@ -97,17 +97,19 @@ function makeInitial(name: string) {
             }) => (
               <TableRow key={character.playerId.toString()}>
                 <TableCell>
-                  <div class="character">
-                    <AvatarComponent client:load src={character.playerAvatar} alt={character.playerName}
-                                     fallbackText={makeInitial(character.playerName)} cName=""/>
-                    <div><span style={{marginLeft: "1em", display: "flex"}}>{character.playerName}</span>
-                      <Badge style={{
-                        marginLeft: "1em",
-                        objectFit: "contain",
-                        background: getColor(character.playerWorld, colors)
-                      }}>{character.playerWorld}</Badge>
+                  <a href=`https://na.finalfantasyxiv.com/lodestone/character/${character.playerId}/` target="_blank">
+                    <div class="character">
+                      <AvatarComponent client:load src={character.playerAvatar} alt={character.playerName}
+                                       fallbackText={makeInitial(character.playerName)} cName=""/>
+                      <div><span style={{marginLeft: "1em", display: "flex"}}>{character.playerName}</span>
+                        <Badge style={{
+                          marginLeft: "1em",
+                          objectFit: "contain",
+                          background: getColor(character.playerWorld, colors)
+                        }}>{character.playerWorld}</Badge>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </TableCell>
                 <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.dotes}</TableCell>
                 <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.pets}</TableCell>
