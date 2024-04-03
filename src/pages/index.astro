@@ -41,6 +41,9 @@ import {
 
 import {Badge} from "@/components/ui/badge"
 import {cn} from "../lib/utils";
+
+import { Button } from "@/components/ui/button"
+
 import {getColor} from "../scripts/getColor";
 
 const colors = [
@@ -73,7 +76,7 @@ function makeInitial(name: string) {
 <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "1em", marginRight: "1em"}}>
   <h1 style={{fontWeight: "bold", fontSize: "xx-large", marginTop: "0.5em"}}>💞 <span>Dotes 'n Pets</span> 💞</h1>
 
-  <Card style={{display: "flex", margin: "1em"}}>
+  <Card style={{display: "flex", margin: "1em", flexDirection: "column"}}>
     <CardContent>
       <!--  <CardHeader>-->
       <!--  <SelectComponent client:load placeholder="All Characters" items={pcSelectItems} />-->
@@ -118,6 +121,9 @@ function makeInitial(name: string) {
         </TableBody>
       </Table>
     </CardContent>
+    <CardFooter>
+      <Button size="icon"><a href="javascript:window.location.href=window.location.href" ><Icon name="ic:round-refresh" height={24} width={24}/></a></Button>
+    </CardFooter>
   </Card>
 </div>
 <SpeedInsights/>
