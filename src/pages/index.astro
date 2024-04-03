@@ -6,7 +6,7 @@ import {Icon} from 'astro-icon/components';
 import {AvatarComponent} from "../components/AvatarComponent";
 import {SelectComponent} from "../components/SelectComponent";
 import "../styles/global.css"
-const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, playerWorld, pcName, pcAvatar, pcId, pcWorld, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId ORDER BY total desc')
+const {rows} = await turso.execute('SELECT playerName, playerAvatar, playerId, playerWorld, pcName, pcAvatar, pcId, pcWorld, emote_105 AS pets, emote_046 + emote_146 + emote_147 as dotes, total FROM emotes WHERE pcID <> playerId AND pcID = 18775041 ORDER BY total desc')
 const themeColor = "#181825"
 
 //  Handles building a selection component
