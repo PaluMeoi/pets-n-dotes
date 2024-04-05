@@ -72,13 +72,13 @@ const themeColor = "#181825"
       <Table style={{verticalAlign: "text-top"}}>
         <TableHeader>
           <TableHead>Emote</TableHead>
-          <TableHead>Count</TableHead>
+          <TableHead style={{textAlign: "center"}}>Count</TableHead>
         </TableHeader>
         <TableBody>
             {emotes.map((emote: any) => (
               <TableRow key={emote.emoteName}>
                 <TableCell>{emote.emoteName}</TableCell>
-                <TableCell>{emote.count}</TableCell>
+                <TableCell style={{textAlign: "center"}}>{emote.count}</TableCell>
               </TableRow>))}
         </TableBody>
       </Table>
