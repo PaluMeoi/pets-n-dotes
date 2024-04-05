@@ -60,6 +60,8 @@ function makeInitial(name: string) {
     const firstLast = name.split(" ");
     return `${firstLast[0].split('')[0]}${firstLast[1].split('')[0]}`
 }
+
+// `/c/${character.pcId}/${character.playerId}`
 ---
 
 <html lang="en">
@@ -102,9 +104,9 @@ function makeInitial(name: string) {
                 dotes: string,
                 pets: string
             }) => (
-              <TableRow key={character.playerId.toString()}>
+              <TableRow key={character.playerId.toString()} >
                 <TableCell>
-                  <a href=`https://na.finalfantasyxiv.com/lodestone/character/${character.playerId}/` target="_blank">
+                  <a href={`https://na.finalfantasyxiv.com/lodestone/character/${character.playerId}/`} target="_blank">
                     <div class="character">
                       <AvatarComponent client:load src={character.playerAvatar} alt={character.playerName}
                                        fallbackText={makeInitial(character.playerName)} cName=""/>
@@ -118,9 +120,10 @@ function makeInitial(name: string) {
                     </div>
                   </a>
                 </TableCell>
-                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.dotes}</TableCell>
-                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.pets}</TableCell>
-                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.total}</TableCell>
+                <TableCell style={{ textAlign: "center"}}>{character.dotes}</TableCell>
+                <TableCell style={{textAlign: "center"}}>{character.pets}</TableCell>
+                <TableCell style={{textAlign: "center"}}><a href={`/c/${character.pcId}/${character.playerId}`}><b>{character.total}</b></a></TableCell>
+                <TableCell><a href={`/c/${character.pcId}/${character.playerId}`}><Icon name="ic:round-more-vert" /></a></TableCell>
               </TableRow>))}
         </TableBody>
       </Table>

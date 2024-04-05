@@ -1,0 +1,95 @@
+---
+import {turso} from "../../../turso";
+import {Icon} from 'astro-icon/components';
+import "../../../styles/global.css"
+import {getColor} from "../../../scripts/getColor";
+
+import {
+    Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow,
+} from "@/components/ui/table"
+
+import {
+    Avatar, AvatarFallback, AvatarImage,
+} from "@/components/ui/avatar"
+
+import {
+    Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
+} from "@/components/ui/card"
+
+import {Badge} from "@/components/ui/badge"
+
+import { Button } from "@/components/ui/button"
+import {emoteData} from "../../../scripts/emotes";
+
+
+// Check parameters
+const {pcId, playerId} = Astro.params;
+const regex = /^\d{1,15}$/g
+if (!regex.test(pcId!) || ! regex.test(playerId!)) {
+    // return Astro.redirect('/')
+    console.log("Error, improper params")
+}
+
+// Get Data
+const {rows} = await turso.execute(`SELECT * FROM emotes WHERE pcId = '${pcId}' AND playerId = '${playerId}';`)
+
+const emotes: {emoteName: string, count: number}[] = [];
+Object.entries(rows[0]).forEach(([k, v]) => {
+    if (typeof v === 'number' && (v! > 0) && k.startsWith("emote") && emoteData[k] !== undefined) {
+        emotes.push({
+            emoteName: emoteData[k],
+            count: v
+        })
+    }
+})
+emotes.sort((a, b) => b.count - a.count)
+
+const themeColor = "#181825"
+---
+
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="generator" content={Astro.generator}/>
+  <meta name="theme-color" content={themeColor}/>
+  <meta name="apple-mobile-web-app-status-bar-style" content={themeColor}/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>💞 Dotes & Pets 💞</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+  </style>
+</head>
+<body class="ctp-frappe" style={{fontFamily: "Comfortaa, ui-rounded"}} >
+
+<div style={{display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "1em", marginRight: "1em"}}>
+  <h1 style={{fontWeight: "bold", fontSize: "xx-large", marginTop: "0.5em"}}>💞 <span>Dotes 'n Pets</span> 💞</h1>
+
+  <Card style={{display: "flex", margin: "1em", flexDirection: "column"}}>
+    <CardHeader> {String(rows[0].playerName ?? '')} ➡️ {String(rows[0].pcName ?? '')} </CardHeader>
+    <CardContent>
+      <Table style={{verticalAlign: "text-top"}}>
+        <TableHeader>
+          <TableHead>Emote</TableHead>
+          <TableHead>Count</TableHead>
+        </TableHeader>
+        <TableBody>
+            {emotes.map((emote: any) => (
+              <TableRow key={emote.emoteName}>
+                <TableCell>{emote.emoteName}</TableCell>
+                <TableCell>{emote.count}</TableCell>
+              </TableRow>))}
+        </TableBody>
+      </Table>
+    </CardContent>
+    <CardFooter>
+      <div>
+        <Button size="icon"><a href={`/c/${pcId}`} ><Icon name="ic:round-arrow-back-ios-new" height={24} width={24}/></a></Button>
+        <Button size="icon"><a href="javascript:window.location.href=window.location.href" ><Icon name="ic:round-refresh" height={24} width={24}/></a></Button>
+      </div>
+    </CardFooter>
+  </Card>
+</div>
+</body>
+</html>
