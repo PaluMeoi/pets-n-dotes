@@ -114,10 +114,10 @@ function makeInitial(name: string) {
                     </div>
                   </a>
                 </TableCell>
-                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.dotes}</TableCell>
-                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.pets}</TableCell>
-                <TableCell style={{verticalAlign: "top", textAlign: "center"}}>{character.total}</TableCell>
-              </TableRow>))}
+                <TableCell style={{textAlign: "center"}}>{character.dotes}</TableCell>
+                <TableCell style={{textAlign: "center"}}>{character.pets}</TableCell>
+                <TableCell style={{textAlign: "center"}}><a href={`/c/${character.pcId}/${character.playerId}`}><b>{character.total}</b></a></TableCell>
+                <TableCell><a href={`/c/${character.pcId}/${character.playerId}`}><Icon name="ic:round-more-vert" /></a></TableCell>              </TableRow>))}
         </TableBody>
       </Table>
     </CardContent>
